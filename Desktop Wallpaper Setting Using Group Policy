@@ -1,0 +1,159 @@
+Desktop Wallpaper Setting Using Group Policy
+Requirement
+
+Active Directory Domain Services installed
+
+Domain Controller running
+
+Domain user created
+
+Wallpaper image file (JPG / PNG)
+
+Shared folder accessible to all users
+
+PART 1: Create Shared Folder for Wallpaper
+Step 1: Create Folder
+
+Login to Domain Controller
+
+Create a folder
+Example:
+
+C:\Wallpaper
+
+Step 2: Copy Wallpaper Image
+
+Copy wallpaper image into the folder
+Example:
+
+C:\Wallpaper\wallpaper.jpg
+
+Step 3: Share Folder
+
+Right-click Wallpaper folder
+
+Click Properties
+
+Go to Sharing tab
+
+Click Advanced Sharing
+
+Check Share this folder
+
+Share Name:
+
+Wallpaper
+
+
+Click Permissions
+
+Allow Read for:
+
+Everyone
+
+
+Click OK
+
+Step 4: Set NTFS Permission
+
+Go to Security tab
+
+Click Edit
+
+Add Domain Users
+
+Allow Read & Execute
+
+Click OK
+
+Network Path
+\\SERVERNAME\Wallpaper\wallpaper.jpg
+
+PART 2: Create Group Policy Object (GPO)
+Step 1: Open Group Policy Management
+
+Open Server Manager
+
+Click Tools
+
+Select Group Policy Management
+
+Step 2: Create New GPO
+
+Right-click your Domain or OU
+
+Click Create a GPO in this domain, and Link it here
+
+GPO Name:
+
+Desktop Wallpaper Policy
+
+
+Click OK
+
+PART 3: Configure Desktop Wallpaper Policy
+Step 1: Edit GPO
+
+Right-click Desktop Wallpaper Policy
+
+Click Edit
+
+Step 2: Navigate Policy Path
+User Configuration
+→ Policies
+→ Administrative Templates
+→ Desktop
+→ Desktop
+
+Step 3: Configure Desktop Wallpaper
+
+Double-click Desktop Wallpaper
+
+Select Enabled
+
+Wallpaper Name:
+
+\\SERVERNAME\Wallpaper\wallpaper.jpg
+
+
+Wallpaper Style:
+
+Fill
+
+
+Click Apply
+
+Click OK
+
+Optional: Prevent User from Changing Wallpaper
+
+Open Prevent changing desktop background
+
+Select Enabled
+
+Click OK
+
+PART 4: Apply Group Policy
+Step 1: Update Policy on Client Machine
+
+Login to client machine with domain user
+
+Open Command Prompt
+
+Run:
+
+gpupdate /force
+
+Step 2: Restart or Logoff
+
+Restart or logoff user
+
+Verification
+
+Desktop wallpaper is automatically applied
+
+User cannot change wallpaper (if policy enabled)
+
+Conclusion
+
+Desktop Wallpaper has been successfully set using Group Policy in Active Directory environment.
